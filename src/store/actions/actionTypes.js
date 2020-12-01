@@ -1,0 +1,1 @@
+export const REPLACE_WEATHER_DATA = "ADD_WEATHER_DATA";
