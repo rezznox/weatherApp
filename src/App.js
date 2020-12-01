@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import WeatherCarrousel from "./components/weather-carrousel";
+import { connect } from "react-redux";
+import { groupByCntsFn } from "./utils/date";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <WeatherCarrousel days={props.days ? props.days : {}}/>
     </div>
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {days: state.weatherReducer.list ?
+          groupByCntsFn(state.weatherReducer.list) :
+          {}};
+}
+
+export default connect(mapStateToProps)(App);
